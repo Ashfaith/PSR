@@ -5,29 +5,18 @@ let computerScore = 0;
 function getComputerChoice(){
     const rand = Math.floor(Math.random() * 3) + 1;
     return rand;
-    // let choice;
-    // if (rand === 1){
-    //     choice = 'rock'
-    // }
-    // else if (rand === 2){
-    //     choice = 'paper'
-    // }
-    // else if (rand === 3){
-    //     choice = 'scissors'
-    // }
-    // return choice;
 }
 
+let btnChoice = document.querySelectorAll(".btnChoice");
 
-function getHumanChoice(){
-    const userInput = prompt("Choose rock, paper or scissors").toLowerCase();
-    const validInput = ["rock", "paper", "scissors"];
-    if (!validInput.includes(userInput)){
-        alert("Not a valid input");
-        getHumanChoice();
-    }
-    return userInput;
-}
+btnChoice.forEach((button) => {
+    button.addEventListener('click', function(e) {
+        let choice = e.target.value; 
+        console.log(choice);
+    });
+});
+
+
 
 const choiceToNumber = {
     'rock': 1,
@@ -63,15 +52,15 @@ function playRound(getComputerChoice, getHumanChoice){
     console.log(`You: ${humanScore}, Computer: ${computerScore}`);
 }
 
-function playGame() {
-    for(let i = 0 ; i < 5; i++){
-        playRound(getComputerChoice, getHumanChoice);
-    }
-    if (humanScore === computerScore){
-        console.log("It's a tie!");
-    }else if (humanScore > computerScore){
-        console.log(`You win with ${humanScore} out of 5!`)
-    } else {
-        console.log(`Computer wins with ${computerScore} out of 5!`)
-    }
-}
+// function playGame() {
+//     for(let i = 0 ; i < 5; i++){
+//         playRound(getComputerChoice, getHumanChoice);
+//     }
+//     if (humanScore === computerScore){
+//         console.log("It's a tie!");
+//     }else if (humanScore > computerScore){
+//         console.log(`You win with ${humanScore} out of 5!`)
+//     } else {
+//         console.log(`Computer wins with ${computerScore} out of 5!`)
+//     }
+// }
