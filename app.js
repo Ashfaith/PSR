@@ -6,13 +6,13 @@ const display = document.querySelector(".display");
 const compBtn = document.querySelector(".compBtn");
 let computerChoice;
 compBtn.addEventListener('click', function() {
-    rand = Math.floor(Math.random() * 3) + 1;
+    let rand = Math.floor(Math.random() * 3) + 1;
     console.log(rand);
 
     computerChoice = numberToChoice[rand];
 
     const cmpDisplay = document.createElement("div");
-    cmpDisplay.textContent = `Computer's choice is ${numberToChoice[rand]}`;
+    cmpDisplay.textContent = `Computer has chosen!`;
     display.appendChild(cmpDisplay);
 });
 
@@ -27,8 +27,11 @@ btnChoice.forEach((button) => {
         
         const humanDisplay = document.createElement("div");
         humanDisplay.textContent = `Your choice is ${humanChoice}`;
-        display.appendChild(humanDisplay); 
         
+        if (display.lastChild) {
+            display.removeChild(display.lastChild);
+        };
+        display.appendChild(humanDisplay);
     });
 });
 
@@ -46,35 +49,23 @@ const numberToChoice = {
 const compare = document.querySelector(".compare");
 compare.addEventListener('click', function() {
     const result = document.createElement("div");
-    if (humanChoice === computerChoice){
+    if (humanChoice === computerChoice) {
         result.textContent = `It's a tie!`;
-        display.appendChild(result); 
-    }else if (humanChoice === 'rock'){
-        if(computerChoice === 'paper'){
-            result.textContent = `Computer wins! ${computerChoice} beats ${humanChoice}`;
-            display.appendChild(result);
-            computerScore++;
-        } else {
-            result.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
-            display.appendChild(result);
-            humanScore++;
-        }
-    }else if (humanChoice === 'paper'){
-        if(computerChoice === 'scissors'){
-            result.textContent = `Computer wins! ${computerChoice} beats ${humanChoice}`;
-            display.appendChild(result);
-            computerScore++;
-        } else {
-            result.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
-            display.appendChild(result);
-            humanScore++;
-        }
-    } else {
+        display.appendChild(result);
+    } else if (
+        (humanChoice === 'rock' && computerChoice === 'scissors') ||
+        (humanChoice === 'scissors' && computerChoice === 'paper') ||
+        (humanChoice === 'paper' && computerChoice === 'rock')
+    ) {
         result.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
         display.appendChild(result);
         humanScore++;
-    } 
-    const scoreUpdate = document.createElement("div");   
+    } else {
+        result.textContent = `Computer wins! ${computerChoice} beats ${humanChoice}`;
+        display.appendChild(result);
+        computerScore++;
+    }
+    const scoreUpdate = document.createElement("div");
     scoreUpdate.textContent = `You: ${humanScore}, Computer: ${computerScore}`;
     display.appendChild(scoreUpdate);
 });
