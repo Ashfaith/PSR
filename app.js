@@ -1,90 +1,103 @@
-let humanScore = 0;
-let computerScore = 0;
+const result = document.querySelector(".result");
+const score = document.querySelector(".score");
 
-const display = document.querySelector(".display");
-
+// Generates computer choice
 const compBtn = document.querySelector(".compBtn");
+const computerDisplay = document.querySelector(".computerDisplay");
+const cmpDisplay = document.createElement("div");
 let computerChoice;
+
 compBtn.addEventListener('click', function() {
+    // Checks if a display exists and removes it if button is pressed
+    if (computerDisplay.contains(cmpDisplay)) {
+        computerDisplay.removeChild(cmpDisplay);
+    }
+    // Generates a random number and converts it to string choice
     let rand = Math.floor(Math.random() * 3) + 1;
     console.log(rand);
-
     computerChoice = numberToChoice[rand];
 
-    const cmpDisplay = document.createElement("div");
+    // Adds text to display of computer choice
     cmpDisplay.textContent = `Computer has chosen!`;
-    display.appendChild(cmpDisplay);
+    computerDisplay.appendChild(cmpDisplay);
 });
 
-
+// Gets human's choice
 const btnChoice = document.querySelectorAll(".btnChoice");
+const choiceDisplay = document.querySelector(".choiceDisplay");
+const humanDisplay = document.createElement("div");
 let humanChoice;
+
 btnChoice.forEach((button) => {
     button.addEventListener('click', function(e) {
+        if (choiceDisplay.contains(humanDisplay)) {
+            choiceDisplay.removeChild(humanDisplay);
+        }
         humanChoice = e.target.value;
         console.log(humanChoice);
 
-        
-        const humanDisplay = document.createElement("div");
         humanDisplay.textContent = `Your choice is ${humanChoice}`;
-        
-        if (display.lastChild) {
-            display.removeChild(display.lastChild);
-        };
-        display.appendChild(humanDisplay);
+        choiceDisplay.appendChild(humanDisplay);
     });
 });
 
-
-// converts the computers random number to a string
+// Converts the computer's random number to a string
 const numberToChoice = {
     1: 'rock',
     2: 'paper',
     3: 'scissors'
 };
 
+// Keeps current score
+let humanScore = 0;
+let computerScore = 0;
 
-
-//tests the choices against each other
+// Tests the choices against each other
 const compare = document.querySelector(".compare");
+const playAgain = document.querySelector(".play-again");
+
+const resultDisplay = document.createElement("div");
 compare.addEventListener('click', function() {
-    const result = document.createElement("div");
+    if (result.contains(resultDisplay)) {
+        result.removeChild(resultDisplay);
+    }
+    
     if (humanChoice === computerChoice) {
-        result.textContent = `It's a tie!`;
-        display.appendChild(result);
+        resultDisplay.textContent = `It's a tie!`;
     } else if (
         (humanChoice === 'rock' && computerChoice === 'scissors') ||
         (humanChoice === 'scissors' && computerChoice === 'paper') ||
         (humanChoice === 'paper' && computerChoice === 'rock')
     ) {
-        result.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
-        display.appendChild(result);
+        resultDisplay.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
         humanScore++;
     } else {
-        result.textContent = `Computer wins! ${computerChoice} beats ${humanChoice}`;
-        display.appendChild(result);
+        resultDisplay.textContent = `Computer wins! ${computerChoice} beats ${humanChoice}`;
         computerScore++;
     }
+
+    result.appendChild(resultDisplay);
+    
     const scoreUpdate = document.createElement("div");
     scoreUpdate.textContent = `You: ${humanScore}, Computer: ${computerScore}`;
-    display.appendChild(scoreUpdate);
+    if (score.lastChild) {
+        score.removeChild(score.lastChild);
+    }
+    score.appendChild(scoreUpdate);
+
+    swapButtons();
 });
 
+//toggle play-again button
+function swapButtons() {
+    compare.classList.toggle('hide');
+    playAgain.classList.toggle('hide');
+}
 
-
-
-
-
-
-// function playGame() {
-//     for(let i = 0 ; i < 5; i++){
-//         playRound(getComputerChoice, getHumanChoice);
-//     }
-//     if (humanScore === computerScore){
-//         console.log("It's a tie!");
-//     }else if (humanScore > computerScore){
-//         console.log(`You win with ${humanScore} out of 5!`)
-//     } else {
-//         console.log(`Computer wins with ${computerScore} out of 5!`)
-//     }
-// }
+// Clear the game text when clicked
+playAgain.addEventListener('click', function() {
+    result.removeChild(resultDisplay);
+    choiceDisplay.removeChild(humanDisplay);
+    computerDisplay.removeChild(cmpDisplay);
+    swapButtons();
+});
