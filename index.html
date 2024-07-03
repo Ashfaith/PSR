@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <container class="score"></container>
-    <div class="game">
-        <div class="display">Choose your weapon!</div>
-        <container class="humanButtons">
-            <button class="btnChoice" value="rock">Rock</button>
-            <button class="btnChoice" value="paper">Paper</button>
-            <button class="btnChoice" value="scissors">Scissors</button>
-        </container>
-        <container class="computerButtons">
-            <button class="compBtn">Generate computer choice</button>
-        </container>
-        <container class="choices">
-            <div class="result"></div>
-            <div class="choiceDisplay"></div>
-            <div class="computerDisplay"></div>
-        </container>
-    </div>
-    <container class="gameState">
-        <button class="compare">Compare</button>
-        <button class="play-again hide">Play again</button>
-    </container>
-    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="game">
+            <container class="score"></container>
+            <h2 class="heading">Choose your weapon!</h2>
+            <container class="humanButtons">
+                <button class="btnChoice" value="rock">Rock</button>
+                <button class="btnChoice" value="paper">Paper</button>
+                <button class="btnChoice" value="scissors">Scissors</button>
+            </container>
+            <container class="computerButtons">
+                <button class="compBtn">Generate computer choice</button>
+            </container>
+            <container class="game-state">
+                <button class="compare">Compare</button>
+                <button class="play-again hide">Play again</button>
+            </container>
+            <container class="choices">
+                <div class="choiceDisplay"></div>
+                <div class="computerDisplay"></div>
+                <h3 class="result"></h3>
+            </container>
+        </div>
+        
 
 
-    <script src="app.js"></script>
-</body>
+        <script src="app.js"></script>
+    </body>
 </html>
