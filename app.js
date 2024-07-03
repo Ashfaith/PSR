@@ -125,7 +125,7 @@ function checkGameEnd() {
         nextRound.classList.toggle('hide');
         
     }
-    if (winner === 'human'){
+    if (winner === 'player'){
         humanWin();
     }
 }
