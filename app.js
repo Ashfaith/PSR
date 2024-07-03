@@ -111,7 +111,7 @@ playAgainBtn.addEventListener('click', function() {
 let winner;
 function checkGameEnd() {
     if (humanScore === 5 || computerScore === 5) {
-        winner = humanScore === 5 ? 'human' : 'computer';
+        winner = humanScore === 5 ? 'player' : 'computer';
         resultDisplay.textContent = `${winner.charAt(0).toUpperCase() + winner.slice(1)} wins!`;
         result.append(resultDisplay);
 
